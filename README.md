@@ -1,2 +1,2 @@
-# EscapeRoom_libgdx
-# Java 17
+# maven_libgdx
+Base para iniciar un proyecto de escritorio con libgdx usando Maven
