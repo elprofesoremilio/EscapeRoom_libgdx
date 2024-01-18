@@ -14,6 +14,7 @@ public class Boot extends Game {
     @Override
     public void create() {
         // TODO load screen
+        // this.setScreen(new MainScreen());
     }
     
 }
