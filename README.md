@@ -1,2 +1,2 @@
-# maven_libgdx
-Base para iniciar un proyecto de escritorio con libgdx usando Maven
+# EscapeRoom_libgdx
+Vamos a crear un generador de EscapeRooms ayudados de libgdx en Java
