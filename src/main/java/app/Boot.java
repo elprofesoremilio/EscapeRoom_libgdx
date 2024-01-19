@@ -1,7 +1,8 @@
 package app;
 
 import com.badlogic.gdx.Game;
-import screens.MainScreen;
+import screens.MenuScreen;
+import screens.PaintedScreen;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Boot extends Game {
     @Override
     public void create() {
         // TODO: 1 - load screen
-        this.setScreen(new MainScreen());
+        this.setScreen(new MenuScreen());
     }
     
 }

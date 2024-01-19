@@ -1,16 +1,21 @@
 package screens;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class MainScreen implements Screen {
+public class PaintedScreen extends GameScreen {
     ShapeRenderer renderer;
-    public MainScreen() {
+    public PaintedScreen() {
         renderer = new ShapeRenderer();
     }
+
     @Override
-    public void render(float delta) {
+    public void update(float delta) {
+
+    }
+
+    @Override
+    public void draw(float delta) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
         renderer.rect(350,100,100,200);
@@ -22,26 +27,10 @@ public class MainScreen implements Screen {
         renderer.rect(400, 50, 50,50);
 
         renderer.end();
-    }
-    @Override
-    public void show() {
 
-    }
-    @Override
-    public void resize(int i, int i1) {
-
-    }
-    @Override
-    public void pause() {
-
-    }
-    @Override
-    public void resume() {
-
-    }
-    @Override
-    public void hide() {
-
+        renderer.begin(ShapeRenderer.ShapeType.Point);
+        renderer.point(100,400,0);
+        renderer.end();
     }
     @Override
     public void dispose() {
