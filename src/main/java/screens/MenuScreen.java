@@ -1,34 +1,49 @@
 package screens;
 
+import app.Assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import config.Config;
+import app.Config;
 
 public class MenuScreen extends GameScreen {
-    ShapeRenderer renderer;
     BitmapFont font;
     SpriteBatch batch;
     int selectedButton = 0;
+    Sprite actualImg;
 
     public MenuScreen() {
-        renderer = new ShapeRenderer();
         font = new BitmapFont();
         batch = new SpriteBatch();
-        Gdx.input.setInputProcessor(this);
+//        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             if (selectedButton>0) selectedButton--;
+            else selectedButton=2;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             if (selectedButton<2) selectedButton++;
+            else selectedButton=0;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            switch (selectedButton) {
+                case 0:
+                    System.out.println("Nuevo juego");
+                    break;
+                case 1:
+                    System.out.println("Estadísticas");
+                    break;
+                case 2:
+                    System.exit(0);
+                    break;
+            }
         }
 
     }
@@ -38,51 +53,44 @@ public class MenuScreen extends GameScreen {
         Gdx.gl.glClearColor(.0f,.0f,.0f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        batch.begin();
+
+        int offset=-Config.BUTTON_GAP;
 
         if (selectedButton==0) {
-            renderer.setColor(Color.CYAN);
+            actualImg = Assets.activeButton;
         } else {
-            renderer.setColor(Color.WHITE);
+            actualImg = Assets.idleButton;
         }
 
-        renderer.rect(
-                Config.SCREEN_WIDTH/2f - Config.BUTTON_WIDTH/2f,
-                Config.SCREEN_HEIGHT/2f - Config.BUTTON_HEIGHT/2f + Config.BUTTON_HEIGHT*2f + Config.BUTTON_GAP,
-                Config.BUTTON_WIDTH,Config.BUTTON_HEIGHT
-        );
-
-
+        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
+        actualImg.setY(Config.SCREEN_HEIGHT/2f + actualImg.getRegionHeight()/2f + offset);
+        actualImg.draw(batch);
 
         if (selectedButton==1) {
-            renderer.setColor(Color.CYAN);
+            actualImg = Assets.activeButton;
         } else {
-            renderer.setColor(Color.WHITE);
+            actualImg = Assets.idleButton;
         }
-        renderer.rect(
-                Config.SCREEN_WIDTH/2f - Config.BUTTON_WIDTH/2f,
-                Config.SCREEN_HEIGHT/2f - Config.BUTTON_HEIGHT/2f + Config.BUTTON_HEIGHT,
-                Config.BUTTON_WIDTH,Config.BUTTON_HEIGHT
-        );
+
+        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
+        actualImg.setY(Config.SCREEN_HEIGHT/2f + offset);
+        actualImg.draw(batch);
 
         if (selectedButton==2) {
-            renderer.setColor(Color.CYAN);
+            actualImg = Assets.activeButton;
         } else {
-            renderer.setColor(Color.WHITE);
+            actualImg = Assets.idleButton;
         }
-        renderer.rect(
-                Config.SCREEN_WIDTH/2f - Config.BUTTON_WIDTH/2f,
-                Config.SCREEN_HEIGHT/2f - Config.BUTTON_HEIGHT/2f - Config.BUTTON_GAP,
-                Config.BUTTON_WIDTH,Config.BUTTON_HEIGHT
-        );
 
-        renderer.end();
+        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
+        actualImg.setY(Config.SCREEN_HEIGHT/2f - actualImg.getRegionHeight()/2f + offset);
+        actualImg.draw(batch);
 
-        batch.begin();
         font.setColor(Color.BLUE);
         font.draw(batch, "Juego nuevo", 350, 370);
-        font.draw(batch, "Estadísticas", 350, 300);
-        font.draw(batch, "Salir", 350, 230);
+        font.draw(batch, "Estadísticas", 350, 290);
+        font.draw(batch, "Salir", 350, 210);
         batch.end();
 
     }
