@@ -5,10 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import app.Config;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MenuScreen extends GameScreen {
     BitmapFont font;
@@ -16,6 +18,8 @@ public class MenuScreen extends GameScreen {
     int selectedButton = 0;
     Sprite actualImg;
 
+    float zombieTime=0;
+    TextureRegion zombieActual;
     public MenuScreen() {
         font = new BitmapFont();
         batch = new SpriteBatch();
@@ -91,8 +95,14 @@ public class MenuScreen extends GameScreen {
         font.draw(batch, "Juego nuevo", 350, 370);
         font.draw(batch, "Estadísticas", 350, 290);
         font.draw(batch, "Salir", 350, 210);
+
+
+        zombieActual = Assets.zombieAnimation.getKeyFrame(zombieTime,true);
+        batch.draw(zombieActual, Config.SCREEN_WIDTH-zombieActual.getRegionWidth(), 0);
+
         batch.end();
 
+        zombieTime += delta;
     }
 
     @Override
