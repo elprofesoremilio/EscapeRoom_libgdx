@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 public class Assets {
@@ -15,7 +14,7 @@ public class Assets {
     public static Animation<TextureAtlas.AtlasRegion> zombieAnimation;
 
     public static void load() {
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gui/glossyButtons.atlas"));
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gui/glossy-buttons.atlas"));
 
         idleButton = new Sprite(atlas.findRegion("gris"));
         activeButton = new Sprite(atlas.findRegion("naranja"));
@@ -27,7 +26,7 @@ public class Assets {
         idleButton.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         activeButton.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        atlas = new TextureAtlas(Gdx.files.internal("npc/Zombie.atlas"));
+        atlas = new TextureAtlas(Gdx.files.internal("npc/zombie.atlas"));
 
         Array<TextureAtlas.AtlasRegion> zombieFrames = new Array<>();
 
