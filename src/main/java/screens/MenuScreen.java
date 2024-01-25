@@ -1,49 +1,53 @@
 package screens;
 
 import app.Assets;
+import app.Config;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import app.Config;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import gui.ButtonMenu;
 
 public class MenuScreen extends GameScreen {
     BitmapFont font;
     SpriteBatch batch;
-    int selectedButton = 0;
-    Sprite actualImg;
-
     float zombieTime=0;
+    ButtonMenu menu;
     TextureRegion zombieActual;
     public MenuScreen() {
         font = new BitmapFont();
         batch = new SpriteBatch();
+        menu = new ButtonMenu(4,
+                Config.SCREEN_WIDTH,Config.SCREEN_HEIGHT,
+                Assets.idleButton, Assets.activeButton,
+                Config.BUTTON_GAP
+        );
+        menu.setButtonText(0,"Nueva partida");
+        menu.setButtonText(1,"Cargar partida");
+        menu.setButtonText(2,"Estadísticas");
+        menu.setButtonText(3,"Salir");
 //        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void update(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            if (selectedButton>0) selectedButton--;
-            else selectedButton=2;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            if (selectedButton<2) selectedButton++;
-            else selectedButton=0;
-        }
+
+        menu.update();
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            switch (selectedButton) {
+            switch (menu.getSelectedButton()) {
                 case 0:
                     System.out.println("Nuevo juego");
                     break;
                 case 1:
-                    System.out.println("Estadísticas");
+                    System.out.println("Cargar partida");
                     break;
                 case 2:
+                    System.out.println("Estadísticas");
+                    break;
+                case 3:
                     System.exit(0);
                     break;
             }
@@ -58,43 +62,7 @@ public class MenuScreen extends GameScreen {
 
         batch.begin();
 
-        int offset=-Config.BUTTON_GAP;
-
-        if (selectedButton==0) {
-            actualImg = Assets.activeButton;
-        } else {
-            actualImg = Assets.idleButton;
-        }
-
-        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
-        actualImg.setY(Config.SCREEN_HEIGHT/2f + actualImg.getRegionHeight()/2f + offset);
-        actualImg.draw(batch);
-
-        if (selectedButton==1) {
-            actualImg = Assets.activeButton;
-        } else {
-            actualImg = Assets.idleButton;
-        }
-
-        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
-        actualImg.setY(Config.SCREEN_HEIGHT/2f + offset);
-        actualImg.draw(batch);
-
-        if (selectedButton==2) {
-            actualImg = Assets.activeButton;
-        } else {
-            actualImg = Assets.idleButton;
-        }
-
-        actualImg.setX(Config.SCREEN_WIDTH/2f - actualImg.getRegionWidth()/2f);
-        actualImg.setY(Config.SCREEN_HEIGHT/2f - actualImg.getRegionHeight()/2f + offset);
-        actualImg.draw(batch);
-
-        font.setColor(Color.BLUE);
-        font.draw(batch, "Juego nuevo", 350, 370);
-        font.draw(batch, "Estadísticas", 350, 290);
-        font.draw(batch, "Salir", 350, 210);
-
+        menu.draw(batch);
 
         zombieActual = Assets.zombieAnimation.getKeyFrame(zombieTime,true);
         batch.draw(zombieActual, Config.SCREEN_WIDTH-zombieActual.getRegionWidth(), 0);

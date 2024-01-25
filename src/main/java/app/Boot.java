@@ -17,5 +17,10 @@ public class Boot extends Game {
         Assets.load();
         this.setScreen(new MenuScreen());
     }
-    
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        Assets.dispose();
+    }
 }
