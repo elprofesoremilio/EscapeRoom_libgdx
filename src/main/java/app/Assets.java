@@ -11,12 +11,12 @@ public class Assets {
     private static final GlyphLayout glyphLayout = new GlyphLayout();
 
     public static void load() {
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gui/buttons.atlas"));
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("gui_assets/buttons.atlas"));
 
         idleButton = atlas.findRegion("azul-claro");
         activeButton = atlas.findRegion("granate");
 
-        atlas = new TextureAtlas(Gdx.files.internal("npc/zombie.atlas"));
+        atlas = new TextureAtlas(Gdx.files.internal("npc_assets/zombie.atlas"));
 
         Array<TextureAtlas.AtlasRegion> zombieFrames = new Array<>();
 

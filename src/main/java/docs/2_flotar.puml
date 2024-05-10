@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+Jugador -r-> (flota)
+(flota) ..> (objeto) : extends
+(flota) ..> (salida) : extends
+(flota) ..> (zona) : extends
+(salida) --> (iluminar) : include
+(objeto) --> (iluminar) : include
+(objeto) ..> (información) : extends
+(zona) --> (mostrar lupa) : include
+@enduml

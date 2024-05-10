@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+Jugador -r-> (clica)
+(clica) ..> (objeto) : extends
+(clica) ..> (salida) : extends
+(clica) ..> (zona) : extends
+(salida) --> (cambiar habitación) : include
+(objeto) --> (interacción) : include
+(objeto) ..> (información) : extends
+(zona) --> (extender) : include
+@enduml
